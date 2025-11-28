@@ -1,11 +1,12 @@
-# Độ chặt cấp phối đá dăm – AASHTO T191
+# Hàm lượng nhựa tưới – TCVN 8863:2011
 
-Ứng dụng Streamlit hỗ trợ kỹ sư hiện trường xác định khối lượng thể tích khô và độ chặt của cấp phối đá dăm theo phương pháp rót cát (Sand Cone - AASHTO T191). Ứng dụng cho phép:
+Ứng dụng Streamlit giúp kỹ sư hiện trường xác định lưu lượng tưới nhựa nóng bằng khay cân theo tiêu chuẩn **TCVN 8863:2011 – Mặt đường láng nhựa nóng**. Ứng dụng cho phép:
 
-- Nhập hoặc hiệu chuẩn khối lượng riêng của cát chuẩn.
-- Tính hoặc nhập trực tiếp độ ẩm của mẫu.
-- Nhập số liệu cân ngoài hiện trường và xem nhanh các kết quả như thể tích hố, khối lượng thể tích ẩm, khối lượng thể tích khô và phần trăm độ chặt so với yêu cầu.
-- Xuất bảng kết quả trực tiếp trên giao diện.
+- Nhập khối lượng khay rỗng và khay + nhựa, tự động suy ra khối lượng nhựa thực tế.
+- Tính diện tích khay hình chữ nhật từ chiều dài và chiều rộng để tránh sai số đo đạc.
+- Quy đổi hàm lượng nhựa từ g/cm² sang kg/m², hiển thị tức thì.
+- So sánh với giới hạn tối thiểu của thiết kế/tiêu chuẩn và đưa ra thông báo “đạt” hoặc “thiếu”.
+- Hiển thị hướng dẫn nhanh ngay trên sidebar để thao tác thống nhất ngoài hiện trường.
 
 ## Yêu cầu hệ thống
 
@@ -28,11 +29,12 @@ streamlit run app.py
 
 Ứng dụng sẽ mở trên trình duyệt tại địa chỉ `http://localhost:8501`.
 
-## Cấu trúc dữ liệu chính
+## Các hàm tính toán chính
 
-- `SandCalibration`: xử lý phần hiệu chuẩn cát.
-- `compute_moisture_content()`: tính độ ẩm từ số liệu sấy hoặc nhập trực tiếp.
-- `compute_field_results()`: tính toán khối lượng thể tích ẩm/khô, thể tích hố.
+- `format_number()`: chuẩn hóa cách hiển thị số theo định dạng Việt Nam.
+- `compute_binder_rate()`: nhận khối lượng nhựa (g) và diện tích khay (cm²) rồi trả về hàm lượng tương ứng (g/cm² và kg/m²).
+- `compute_tray_area()`: tính diện tích khay hình chữ nhật dựa trên chiều dài/rộng.
+- `evaluate_spec()`: đối chiếu kết quả với giới hạn tối thiểu của TCVN 8863:2011 và trả về thông báo trạng thái.
 
 ## Tùy biến
 
