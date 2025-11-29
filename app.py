@@ -45,7 +45,7 @@ def evaluate_spec(rate_kg_m2: float, spec_min: float) -> str:
     if math.isnan(rate_kg_m2):
         return "Thiếu dữ liệu."
     if rate_kg_m2 >= spec_min:
-        return "Đạt yêu cầu tối thiểu của TCVN 8863:2011."
+        return "Đạt yêu cầu."
     return "Thiếu nhựa so với yêu cầu, cần tăng lưu lượng."
 
 
@@ -80,10 +80,10 @@ def main() -> None:
 
         st.header("Hướng dẫn nhanh")
         st.markdown(
-            "- Làm sạch và gia nhiệt khay trước khi cân.\n"
+            "- Làm sạch khay trước khi cân.\n"
             "- Cân khay rỗng và khay + nhựa, ghi số tới ±0,1 g.\n"
             "- Đo chiều dài, chiều rộng khay để tính diện tích (cm²).\n"
-            "- Nhập giới hạn tối thiểu của thiết kế để so sánh với TCVN 8863:2011."
+            "- Nhập giới hạn tối thiểu của thiết kế để so sánh."
         )
 
     st.subheader("1. Khối lượng khay và nhựa")
@@ -91,13 +91,13 @@ def main() -> None:
     mass_full = col1.number_input(
         "Khối lượng khay + nhựa (g)",
         min_value=0.0,
-        value=725.0,
+        value=1100.0,
         step=0.1,
     )
     mass_empty = col2.number_input(
         "Khối lượng khay rỗng (g)",
         min_value=0.0,
-        value=600.0,
+        value=855.0,
         step=0.1,
     )
     mass_g = mass_full - mass_empty
@@ -111,13 +111,13 @@ def main() -> None:
     length_cm = col_dim1.number_input(
         "Chiều dài khay (cm)",
         min_value=0.0,
-        value=30.0,
+        value=40.0,
         step=0.5,
     )
     width_cm = col_dim2.number_input(
         "Chiều rộng khay (cm)",
         min_value=0.0,
-        value=20.0,
+        value=25.0,
         step=0.5,
     )
     area_cm2 = compute_tray_area(length_cm, width_cm)
